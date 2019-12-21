@@ -1,0 +1,214 @@
+int moterA1=3;
+int moterA2=5;
+int moterB1=9;
+int moterB2=10;
+char data='s';
+
+void setup()
+{
+  bluetooth.begin(9600);
+  pinMode(moterA1, OUTPUT);
+  pinMode(moterA2, OUTPUT);
+  pinMode(moterB1, OUTPUT);
+  pinMode(moterB2, OUTPUT);
+  
+  digitalWrite(moterA1,LOW);
+  digitalWrite(moterA2,LOW);
+  digitalWrite(moterB1,LOW);
+  digitalWrite(moterB2,LOW);
+}
+
+void loop()
+{
+  if(bluetooth.available()>0){
+  data=bluetooth.read();
+  if(data=='F' || data=='f'){
+    digitalWrite(moterB1,HIGH);
+    digitalWrite(moterB2,LOW);
+  }
+  else if(data=='B' || data=='b'){
+    digitalWrite(moterB1,LOW);
+    digitalWrite(moterB2,HIGH);
+  }
+  else if(data=='L' || data=='l'){
+    digitalWrite(moterA1,LOW);
+    digitalWrite(moterA2,HIGH);
+  }
+  else if(data=='R' || data=='r'){
+    digitalWrite(moterA1,HIGH);
+    digitalWrite(moterA2,LOW);
+  }
+   else if(data=='FR' || data=='fr'){
+    digitalWrite(moterB1,HIGH);
+    digitalWrite(moterB2,LOW);
+    digitalWrite(moterA1,HIGH);
+    digitalWrite(moterA2,LOW);
+  }
+   else if(data=='FL' || data=='fl'){
+    digitalWrite(moterB1,HIGH);
+    digitalWrite(moterB2,LOW);
+    digitalWrite(moterA1,LOW);
+    digitalWrite(moterA2,HIGH);
+  }
+   else if(data=='BR' || data=='br'){
+    digitalWrite(moterB1,LOW);
+    digitalWrite(moterB2,HIGH);
+    digitalWrite(moterA1,HIGH);
+    digitalWrite(moterA2,LOW);
+  }
+   else if(data=='BL' || data=='bl'){
+    digitalWrite(moterB1,LOW);
+    digitalWrite(moterB2,HIGH);
+    digitalWrite(moterA1,LOW);
+    digitalWrite(moterA2,HIGH);
+  }
+    
+  else{
+    digitalWrite(moterB1,LOW);
+    digitalWrite(moterB2,LOW);
+    digitalWrite(moterA1,LOW);
+    digitalWrite(moterA2,LOW);
+ 	}
+  }
+}
+
+
+
+----------------------------------------------------------------------------
+
+
+int moterA1=10;
+int moterA2=5;
+int moterB1=12;
+int moterB2=13;
+int led1=7;
+int led2=8;
+int horn=12;
+char data;
+
+void setup()
+{
+  Serial.begin(9600);
+  pinMode(moterA1, OUTPUT);
+  pinMode(moterA2, OUTPUT);
+  pinMode(moterB1, OUTPUT);
+  pinMode(moterB2, OUTPUT);
+  
+  
+ 
+}
+
+void loop()
+{
+  if(Serial.available()!=0){
+  data=Serial.read();
+  }
+  if(data=='1'){
+    digitalWrite(moterB1,HIGH);
+    digitalWrite(moterB2,LOW);
+    digitalWrite(moterA1,LOW);
+    digitalWrite(moterA2,LOW);
+    Serial.println("1");
+  }
+  if(data=='2'){
+    digitalWrite(moterB1,LOW);
+    digitalWrite(moterB2,HIGH);
+    digitalWrite(moterA1,LOW);
+    digitalWrite(moterA2,LOW);
+     Serial.println("2");
+  }
+  if(data=='3'){
+    digitalWrite(moterB1,HIGH);
+    digitalWrite(moterB2,LOW);
+    digitalWrite(moterA1,LOW);
+    digitalWrite(moterA2,HIGH);
+   
+     Serial.println("3");
+    
+  }
+ if(data=='4'){
+     digitalWrite(moterA1,HIGH);
+    digitalWrite(moterA2,LOW);
+    digitalWrite (moterB1,HIGH);
+    digitalWrite(moterB2,HIGH);
+     Serial.println("4");
+    
+  }
+   /* if(data=='I'){
+    digitalWrite(moterB1,HIGH);
+    digitalWrite(moterB2,LOW);
+    digitalWrite(moterA1,HIGH);
+    digitalWrite(moterA2,LOW);
+  }
+    if(data=='G'){
+    digitalWrite(moterB1,HIGH);
+    digitalWrite(moterB2,LOW);
+    digitalWrite(moterA1,LOW);
+    digitalWrite(moterA2,HIGH);
+  }
+    if(data=='J'){
+    digitalWrite(moterB1,LOW);
+    digitalWrite(moterB2,HIGH);
+    digitalWrite(moterA1,HIGH);
+    digitalWrite(moterA2,LOW);
+  }
+    if(data=='H'){
+    digitalWrite(moterB1,LOW);
+    digitalWrite(moterB2,HIGH);
+    digitalWrite(moterA1,HIGH);
+    digitalWrite(moterA2,LOW);
+  }
+   if(data=='S'){
+     digitalWrite(moterB1,LOW);
+     digitalWrite(moterB2,LOW);
+     digitalWrite(moterA1,LOW);
+     digitalWrite(moterA2,LOW);
+   }
+    
+    if(data=='W'){
+      digitalWrite(led1,HIGH);
+    }
+    if(data=='w'){
+      digitalWrite(led1,LOW);
+    }
+    if(data=='U'){
+      digitalWrite(led2,HIGH);
+    }
+    if(data=='u'){
+      digitalWrite(led2,LOW);
+    }
+    if (data=='X'){
+      digitalWrite(horn,HIGH);
+    }
+     if(data=='x'){
+      digitalWrite(horn,LOW);
+    }*/
+    
+  }
+---------------------------------------------------------------------
+#include <SoftwareSerial.h>
+SoftwareSerial bluetooth(10,11);//RX,TX
+char data='a';
+
+
+void setup() {
+
+ Serial.begin(9600);
+ while(!Serial){
+  ;
+ }
+  bluetooth.begin(9600);
+
+}
+
+void loop() {
+ if(bluetooth.available()){
+    data=bluetooth.read();
+    Serial.println(data);
+    
+    
+    
+  }
+  // put your main code here, to run repeatedly:
+
+}

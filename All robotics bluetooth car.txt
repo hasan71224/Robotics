@@ -1,0 +1,225 @@
+ int moterA1=3;
+int moterA2=5;
+int moterB1=9;
+int moterB2=10;
+int ledall=12;
+int ledF=13;
+int music=11;
+char data;
+
+void setup()
+{
+  Serial.begin(9600);
+  pinMode(moterA1, OUTPUT);
+  pinMode(moterA2, OUTPUT);
+  pinMode(moterB1, OUTPUT);
+  pinMode(moterB2, OUTPUT);
+}
+
+void loop()
+{
+  if(Serial.available()){
+  data=Serial.read();
+  if(data=='F'){
+    digitalWrite(moterB1,HIGH);
+    digitalWrite(moterB2,LOW);
+  }
+  if(data=='B'){
+    digitalWrite(moterB1,LOW);
+    digitalWrite(moterB2,HIGH);
+  }
+  if(data=='L'){
+    digitalWrite(moterA1,HIGH);
+    digitalWrite(moterA2,LOW);
+  }
+  if(data=='R'){
+    digitalWrite(moterA1,LOW);
+    digitalWrite(moterA2,HIGH);
+  }
+  
+  if(data=='G'){
+    digitalWrite(moterA1,HIGH);
+    digitalWrite(moterA2,LOW);
+     digitalWrite(moterB1,HIGH);
+    digitalWrite(moterB2,LOW);
+  }
+  if(data=='I'){
+    digitalWrite(moterA1,LOW);
+    digitalWrite(moterA2,HIGH);
+    digitalWrite(moterB1,HIGH);
+    digitalWrite(moterB2,LOW);
+  }
+  if(data=='H'){
+    digitalWrite(moterB1,LOW);
+    digitalWrite(moterB2,HIGH);
+     digitalWrite(moterA1,HIGH);
+    digitalWrite(moterA2,LOW);
+  }
+   if(data=='J'){
+    digitalWrite(moterB1,LOW);
+    digitalWrite(moterB2,HIGH);
+    digitalWrite(moterA1,LOW);
+    digitalWrite(moterA2,HIGH);
+   }
+     if(data=='S'){
+    digitalWrite(moterB1,LOW);
+    digitalWrite(moterB2,LOW);
+    digitalWrite(moterA1,LOW);
+    digitalWrite(moterA2,LOW);
+   }
+
+
+     if(data=='W'){
+      digitalWrite(ledF,HIGH);
+    }
+    if(data=='w'){
+      digitalWrite(ledF,LOW);
+    }
+    if(data=='V'){
+      digitalWrite(music,HIGH);
+    }
+    if(data=='v'){
+      digitalWrite(music,LOW);
+    }
+    if (data=='X'){
+      digitalWrite(ledall,HIGH);
+    }
+     if(data=='x'){
+      digitalWrite(ledall,LOW);
+    }
+   
+  
+  }
+}
+---------------------------------------------------------------------
+#include <SoftwareSerial.h>
+SoftwareSerial bluetooth(10,11);//RX,TX
+char data='a';
+
+
+void setup() {
+
+ Serial.begin(9600);
+ while(!Serial){
+  ;
+ }
+  bluetooth.begin(9600);
+
+}
+
+void loop() {
+ if(bluetooth.available()){
+    data=bluetooth.read();
+    Serial.println(data);
+    
+    
+    
+  }
+  // put your main code here, to run repeatedly:
+
+}
+....................................................................................
+....................................................................................
+//*Rover Tank........*\\
+
+int LeftMotorF=3;
+int LeftMotorB=6;
+int RightMotorF=7;
+int RightMotorB=9;
+int FLight=5;
+int BLight=8;
+char data;
+
+void setup() {
+  Serial.begin(9600);
+  pinMode (LeftMotorF,OUTPUT);
+  pinMode (LeftMotorB,OUTPUT);
+  pinMode (RightMotorF,OUTPUT);
+  pinMode (RightMotorB,OUTPUT);
+  pinMode (FLight,OUTPUT);
+  pinMode (BLight,OUTPUT);
+
+}
+
+void loop() {
+  if(Serial.available()){
+    data=Serial.read();
+    //for forward.....
+    if(data=='A'){
+      digitalWrite(LeftMotorF,HIGH);
+      digitalWrite(LeftMotorB,LOW);
+      digitalWrite(RightMotorF,HIGH);
+      digitalWrite(RightMotorB,LOW);
+    }
+    //for Backward........
+     if(data=='B'){
+      digitalWrite(LeftMotorF,LOW);
+      digitalWrite(LeftMotorB,HIGH);
+      digitalWrite(RightMotorF,LOW);
+      digitalWrite(RightMotorB,HIGH);
+    }
+    //for Left........
+     if(data=='C'){
+      digitalWrite(LeftMotorF,LOW);
+      digitalWrite(LeftMotorB,LOW);
+      digitalWrite(RightMotorF,HIGH);
+      digitalWrite(RightMotorB,LOW);
+    }
+      //for Right........
+     if(data=='D'){
+      digitalWrite(LeftMotorF,HIGH);
+      digitalWrite(LeftMotorB,LOW);
+      digitalWrite(RightMotorF,LOW);
+      digitalWrite(RightMotorB,LOW);
+    }
+      //for Stop........
+     if(data=='E'){
+      digitalWrite(LeftMotorF,LOW);
+      digitalWrite(LeftMotorB,LOW);
+      digitalWrite(RightMotorF,LOW);
+      digitalWrite(RightMotorB,LOW);
+    }
+      //for Forward Left........
+      if(data=='F'){
+      analogWrite(LeftMotorF,128);
+      analogWrite(LeftMotorB,0);
+      analogWrite(RightMotorF,255);
+      analogWrite(RightMotorB,0);
+    }
+        //for Forward Right........
+      if(data=='G'){
+      analogWrite(LeftMotorF,255);
+      analogWrite(LeftMotorB,0);
+      analogWrite(RightMotorF,128);
+      analogWrite(RightMotorB,0);
+    }
+      //for Backward Left........
+      if(data=='H'){
+      analogWrite(LeftMotorF,0);
+      analogWrite(LeftMotorB,128);
+      analogWrite(RightMotorF,0);
+      analogWrite(RightMotorB,255);
+    }
+     //for Backward Right........
+      if(data=='I'){
+      analogWrite(LeftMotorF,0);
+      analogWrite(LeftMotorB,255);
+      analogWrite(RightMotorF,0);
+      analogWrite(RightMotorB,128);
+    }
+    //for Front Light.....
+    if(data=='J'){
+      digitalWrite(FLight,HIGH);
+    }
+    if(data=='j'){
+      digitalWrite(FLight,LOW);
+    }
+    //for Bottom Light.....
+    if(data=='K'){
+      digitalWrite(BLight,HIGH);
+    }
+    if(data=='k'){
+      digitalWrite(BLight,LOW);
+    }  
+  }
+}
